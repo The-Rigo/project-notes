@@ -1,30 +1,32 @@
 package com.example.demo.model;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Index;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import com.example.demo.model.base.BaseEntity;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import jakarta.persistence.*;
+import lombok.*;
+
+import java.util.ArrayList;
 import java.util.List;
-
+@Getter
+@Setter
+@ToString
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
-@Table(name = "users", indexes = @Index(columnList = "email"))
-public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+@EntityListeners(AuditingEntityListener.class)
+@Table(name = "users")
+@AttributeOverride(name ="id", column = @Column(name = "userid"))
+public class User extends BaseEntity {
+    @Column(name = "username",length = 255,nullable = false, unique = true)
+    private String username;
 
-    @Column(nullable = false, unique = true)
+    @Column(name = "email",length = 255,nullable = false, unique = true)
     private String email;
 
-    @Column(nullable = false)
+    @Column(name = "password", length = 255,nullable = false)
     private String password; // BCrypt hash
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Note> notes;
+    private List<Note> notes = new ArrayList<>();
 }

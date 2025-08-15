@@ -22,7 +22,7 @@
   ### Run Spring Boot
   > mvn spring-boot:run
 
-## Estructura del proyecto en Backend
+## Project structure in Backend
 ```
 project-notes/
 ├─ pom.xml
@@ -64,12 +64,12 @@ project-notes/
 
 ---
 
-## Documentacion
-### Swagger-ui en Localhost
+## Documentation
+### Swagger-ui in Localhost
 > http://localhost:8080/swagger-ui/index.html
-### Listas de Endpoints
+### Endpoint Lists
 #### UserController - Endpoint
-| HTTP Método | Endpoint | Descripción |  Respuestas HTTP |
+| HTTP Method | Endpoint | Description |  HTTP Responses |
 | :---         |     :---:      |          :---: |          :--- |
 | POST   | /api/v1/users     | registrar un nuevo user    | 201 (CREATED), 400 (BAD REQUEST) |
 | GET     | /api/v1/users       | Obtiene todos los users      | 200 (OK) |
@@ -77,7 +77,7 @@ project-notes/
 | DELETE     | /api/v1/users/{id}       | Elimina user por su ID      |  204 (NO CONTENT), 404 (NOT FOUND) |
 
 #### NoteController - Endpoint
-| HTTP Método | Endpoint | Descripción |  Respuestas HTTP |
+| HTTP Method | Endpoint | Description |  HTTP Responses |
 | :---         |     :---:      |          :---: |          :--- |
 | POST   | /api/v1/notes     | registrar un nuevo notes    | 201 (CREATED), 400 (BAD REQUEST) |
 | GET     | /api/v1/notes       | Obtiene todos los notes      | 200 (OK) |
@@ -86,7 +86,7 @@ project-notes/
 | DELETE     | /api/v1/notes/{id}       | Elimina un notes por su ID      |  204 (NO CONTENT), 404 (NOT FOUND) |
 
 #### TagController - Endpoint
-| HTTP Método | Endpoint | Descripción |  Respuestas HTTP |
+| HTTP Method | Endpoint | Description |  HTTP Responses |
 | :---         |     :---:      |          :---: |          :--- |
 | POST   | /api/v1/tags     | registrar un nuevo tags    | 201 (CREATED), 400 (BAD REQUEST) |
 | GET     | /api/v1/tags       | Obtiene todos los tags      | 200 (OK) |

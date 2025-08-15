@@ -10,4 +10,5 @@ public interface UserService {
     Optional<User> findById(Long id);
     List<User> findAll();
     void delete(Long id);
+    User assignTag(Long userId, List<Long> tagIds);
 }

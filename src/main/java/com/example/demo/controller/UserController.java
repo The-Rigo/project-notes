@@ -60,4 +60,11 @@ public class UserController {
         userService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+    @PostMapping("/{id}/tags")
+    public ResponseEntity<User> assignTags(
+            @PathVariable Long id,
+            @RequestBody List<Long> tagIDs){
+        return ResponseEntity.ok(userService.assignTag(id,tagIDs));
+    }
 }

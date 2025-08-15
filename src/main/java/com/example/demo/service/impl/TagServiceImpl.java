@@ -12,6 +12,8 @@ import java.util.Optional;
 @Service
 @Transactional
 public class TagServiceImpl implements TagService {
+    private static final String TAG_NOT_FOUND_MSG = "Tag not found with id: ";
+    private static final String NULL_ARGUMENT_MSG = " cannot be null";
     private final TagRepository tagRepository;
 
     @Autowired
@@ -19,42 +21,79 @@ public class TagServiceImpl implements TagService {
         this.tagRepository = tagRepository;
     }
 
+    /**
+     * Creates a new tag in the system.
+     * @param tag The tag entity to be created
+     * @return The persisted tag entity
+     * @throws IllegalArgumentException if tag is null
+     */
     @Override
     public Tag create(Tag tag) {
-        if (tag == null) {
-            throw new IllegalArgumentException("Tag cannot be null");
-        }
+        validateNotNull(tag, "Tag");
         return tagRepository.save(tag);
     }
 
+    /**
+     * Retrieves a tag by its unique identifier.
+     * @param id The tag ID to search for
+     * @return Optional containing the tag if found
+     * @throws IllegalArgumentException if id is null
+     */
     @Override
     public Optional<Tag> findById(Long id) {
-        if (id == null) {
-            throw new IllegalArgumentException("Id cannot be null");
-        }
+        validateNotNull(id, "ID");
         return tagRepository.findById(id);
     }
 
+    /**
+     * Retrieves all tags in the system.
+     * @return List of all tags
+     */
     @Override
     public List<Tag> findAll() {
         return tagRepository.findAll();
     }
 
+    /**
+     * Updates an existing tag with new details.
+     * @param id The ID of the tag to update
+     * @param tagDetails The new tag details
+     * @return The updated tag entity
+     * @throws IllegalArgumentException if id or tagDetails are null
+     * @throws RuntimeException if tag with given id is not found
+     */
     @Override
     public Tag update(Long id, Tag tagDetails) {
-        if (id == null || tagDetails == null) {
-            throw new IllegalArgumentException("ID and tag details cannot be null");
-        }
+        validateNotNull(id, "ID");
+        validateNotNull(tagDetails, "Tag details");
         return tagRepository.findById(id)
-                .map(existingTag -> {
-                    existingTag.setName("test");
-                    return tagRepository.save(existingTag);
-                })
-                .orElseThrow(()-> new RuntimeException("Tag not found with id: "+id));
+                .map(existingTag -> updateTagFields(existingTag, tagDetails))
+                .orElseThrow(() -> new RuntimeException(TAG_NOT_FOUND_MSG + id));
     }
+
+    /**
+     * Deletes a tag by its ID.
+     * @param id The ID of the tag to delete
+     * @throws IllegalArgumentException if id is null
+     */
 
     @Override
     public void delete(Long id) {
+        validateNotNull(id, "ID");
+        tagRepository.deleteById(id);
+    }
 
+    // Helper method to validate null arguments
+    private void validateNotNull(Object argument, String argumentName) {
+        if (argument == null) {
+            throw new IllegalArgumentException(argumentName + NULL_ARGUMENT_MSG);
+        }
+    }
+
+    // Helper method to update tag fields
+    private Tag updateTagFields(Tag existingTag, Tag newDetails) {
+        existingTag.setName(newDetails.getName());
+        // Aquí se pueden añadir más campos si el Tag tiene más propiedades
+        return tagRepository.save(existingTag);
     }
 }

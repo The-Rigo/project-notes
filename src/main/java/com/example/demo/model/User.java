@@ -8,6 +8,11 @@ import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
+
+/**
+ * Represents a User entity in the system.
+ * Users can create notes and organize them with tags.
+ */
 @Getter
 @Setter
 @ToString
@@ -18,15 +23,29 @@ import java.util.List;
 @Table(name = "users")
 @AttributeOverride(name ="id", column = @Column(name = "userid"))
 public class User extends BaseEntity {
-    @Column(name = "username",length = 255,nullable = false, unique = true)
+    private static final int MAX_CREDENTIAL_LENGTH = 255;
+
+    /**
+     * Unique username for login (required, unique)
+     */
+    @Column(name = "username",length = MAX_CREDENTIAL_LENGTH,nullable = false, unique = true)
     private String username;
 
-    @Column(name = "email",length = 255,nullable = false, unique = true)
+    /**
+     * User's email address (required, unique)
+     */
+    @Column(name = "email",length = MAX_CREDENTIAL_LENGTH,nullable = false, unique = true)
     private String email;
 
-    @Column(name = "password", length = 255,nullable = false)
+    /**
+     * Encrypted password (BCrypt hash)
+     */
+    @Column(name = "password", length = MAX_CREDENTIAL_LENGTH,nullable = false)
     private String password; // BCrypt hash
 
+    /**
+     * Tags created by this user
+     */
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Tag> tags = new ArrayList<>();
 }

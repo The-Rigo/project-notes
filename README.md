@@ -22,7 +22,7 @@
   ### Run Spring Boot
   > mvn spring-boot:run
 
-## Project structure in Backend
+## 🧱 Project structure in Backend
 ```
 project-notes/
 ├─ pom.xml
@@ -64,7 +64,7 @@ project-notes/
 
 ---
 
-## Documentation
+## 📃Documentation
 ### Swagger-ui in Localhost
 > http://localhost:8080/swagger-ui/index.html
 ### Endpoint Lists

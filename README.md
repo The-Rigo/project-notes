@@ -75,7 +75,7 @@ project-notes/
 | GET     | /api/v1/users       | Get all the users      | 200 (OK) |
 | GET     | /api/v1/users/{id}       | Get an user by ID      | 200 (OK), 404 (NOT FOUND) |
 | DELETE     | /api/v1/users/{id}       | Delete user by ID      |  204 (NO CONTENT), 404 (NOT FOUND) |
-| POST     | /api/v1/users/{id}/tags       | Assign tags by a user      |  204 (NO CONTENT), 404 (NOT FOUND) |
+| POST     | /api/v1/users/{id}/tags       | Assign tags by a user      |  201 (CREATED), 400 (BAD REQUEST), 404 (NOT FOUND) |
 | GET     | /api/v1/users/{id}/tags     | Get tags by user      |  204 (NO CONTENT), 404 (NOT FOUND) |
 
 #### NoteController - Endpoint

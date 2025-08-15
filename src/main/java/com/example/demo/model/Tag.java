@@ -45,15 +45,15 @@ public class Tag extends BaseEntity {
     /**
      * The user who owns this tag
      */
-    @ManyToOne(fetch = FetchType.LAZY) // Optimización de rendimiento
-    @JoinColumn(name = "user_id")
+    @ManyToOne(fetch = FetchType.LAZY) // Performance Optimization
+    @JoinColumn(name = "userid")
     @JsonIgnore
     private User user;
 
     /**
      * List of notes associated with this tag
      */
-    @ManyToMany(mappedBy = "tags", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "tags", fetch = FetchType.LAZY)//Performance Optimization
     private List<Note> notes = new ArrayList<>();
 
 }

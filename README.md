@@ -65,32 +65,34 @@ project-notes/
 ---
 
 ## 📃Documentation
-### Swagger-ui in Localhost
+### Swagger-ui in localhost
 > http://localhost:8080/swagger-ui/index.html
 ### Endpoint Lists
 #### UserController - Endpoint
 | HTTP Method | Endpoint | Description |  HTTP Responses |
 | :---         |     :---:      |          :---: |          :--- |
-| POST   | /api/v1/users     | Registra un nuevo user    | 201 (CREATED), 400 (BAD REQUEST) |
-| GET     | /api/v1/users       | Obtiene todos los users      | 200 (OK) |
-| GET     | /api/v1/users/{id}       | Obtiene user por su ID      | 200 (OK), 404 (NOT FOUND) |
-| DELETE     | /api/v1/users/{id}       | Elimina user por su ID      |  204 (NO CONTENT), 404 (NOT FOUND) |
+| POST   | /api/v1/users     | Create a new user    | 201 (CREATED), 400 (BAD REQUEST) |
+| GET     | /api/v1/users       | Get all the users      | 200 (OK) |
+| GET     | /api/v1/users/{id}       | Get an user by ID      | 200 (OK), 404 (NOT FOUND) |
+| DELETE     | /api/v1/users/{id}       | Delete user by ID      |  204 (NO CONTENT), 404 (NOT FOUND) |
+| POST     | /api/v1/users/{id}/tags       | Assign tags by a user      |  204 (NO CONTENT), 404 (NOT FOUND) |
+| GET     | /api/v1/users/{id}/tags     | Get tags by user      |  204 (NO CONTENT), 404 (NOT FOUND) |
 
 #### NoteController - Endpoint
 | HTTP Method | Endpoint | Description |  HTTP Responses |
 | :---         |     :---:      |          :---: |          :--- |
-| POST   | /api/v1/notes     | Registra un nuevo notes    | 201 (CREATED), 400 (BAD REQUEST) |
-| GET     | /api/v1/notes       | Obtiene todos los notes      | 200 (OK) |
-| GET     | /api/v1/notes/{id}       | Obtiene un notes por su ID      | 200 (OK), 404 (NOT FOUND) |
-| PUT     | /api/v1/notes/{id}       | Actualiza un notes existente por su ID      | 200 (OK), 404 (NOT FOUND) |
-| DELETE     | /api/v1/notes/{id}       | Elimina un notes por su ID      |  204 (NO CONTENT), 404 (NOT FOUND) |
+| POST   | /api/v1/notes     | Create a new note    | 201 (CREATED), 400 (BAD REQUEST) |
+| GET     | /api/v1/notes       | Get all the notes      | 200 (OK) |
+| GET     | /api/v1/notes/{id}       | Get a note by ID      | 200 (OK), 404 (NOT FOUND) |
+| PUT     | /api/v1/notes/{id}       | Updates an existing note by its ID      | 200 (OK), 404 (NOT FOUND) |
+| DELETE     | /api/v1/notes/{id}       | Delete a note by ID      |  204 (NO CONTENT), 404 (NOT FOUND) |
 
 #### TagController - Endpoint
 | HTTP Method | Endpoint | Description |  HTTP Responses |
 | :---         |     :---:      |          :---: |          :--- |
-| POST   | /api/v1/tags     | Registra un nuevo tags    | 201 (CREATED), 400 (BAD REQUEST) |
-| GET     | /api/v1/tags       | Obtiene todos los tags      | 200 (OK) |
-| DELETE     | /api/v1/tags/{id}       | Elimina un tags por su ID      |  204 (NO CONTENT), 404 (NOT FOUND) |
+| POST   | /api/v1/tags     | Create a new tag    | 201 (CREATED), 400 (BAD REQUEST) |
+| GET     | /api/v1/tags       | Get all the tags      | 200 (OK) |
+| DELETE     | /api/v1/tags/{id}       | Delete a tags by ID      |  204 (NO CONTENT), 404 (NOT FOUND) |
 
 ## Database Design
 ![alt text](https://github.com/The-Rigo/project-notes/blob/main/assets/Project-Notes.png)

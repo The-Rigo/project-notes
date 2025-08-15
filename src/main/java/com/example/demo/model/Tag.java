@@ -1,6 +1,7 @@
 package com.example.demo.model;
 
 import com.example.demo.model.base.BaseEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -46,6 +47,7 @@ public class Tag extends BaseEntity {
      */
     @ManyToOne(fetch = FetchType.LAZY) // Optimización de rendimiento
     @JoinColumn(name = "user_id")
+    @JsonIgnore
     private User user;
 
     /**

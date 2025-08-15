@@ -1,6 +1,8 @@
 package com.example.demo.service.impl;
 
+import com.example.demo.model.Tag;
 import com.example.demo.model.User;
+import com.example.demo.repository.TagRepository;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.service.interfaces.UserService;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -16,13 +18,16 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
     private static final String USER_NOT_FOUND_MSG = "User not found with id: ";
     private static final String NULL_ARGUMENT_MSG = " cannot be null";
+    private static final String USERNOTFOUND = "User not found";
 
     private final UserRepository userRepository;
+    private final TagRepository tagRepository;
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public UserServiceImpl(UserRepository userRepository, TagRepository tagRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.tagRepository = tagRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -94,5 +99,13 @@ public class UserServiceImpl implements UserService {
         }
         // Aquí se pueden añadir más campos según la entidad User
         return existingUser;
+    }
+
+    @Override
+    public User assignTag(Long userId, List<Long> tagIds) {
+        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException(USERNOTFOUND));
+        List<Tag> roles = tagRepository.findAllById(tagIds);
+        user.setTags(roles);
+        return userRepository.save(user);
     }
 }

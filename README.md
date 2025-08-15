@@ -94,5 +94,11 @@ project-notes/
 | GET     | /api/v1/tags       | Get all the tags      | 200 (OK) |
 | DELETE     | /api/v1/tags/{id}       | Delete a tags by ID      |  204 (NO CONTENT), 404 (NOT FOUND) |
 
-## Database Design
+## 💾Database Design
 ![alt text](https://github.com/The-Rigo/project-notes/blob/main/assets/Project-Notes.png)
+## 🛠Architecture
+- **Entity:** It is a data model, a class that represents the DB.
+- **Repository:** It is data access, interfaces that handle CRUD operations with the DB
+- **Service:** It is business logic, a class that contains the application logic.
+- **Controller:** It is the presentation layer, it handles HTTP requests and returns a response.
+![alt text](https://github.com/The-Rigo/project-notes/blob/main/assets/architecture.png)

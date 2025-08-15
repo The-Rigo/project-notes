@@ -71,7 +71,7 @@ project-notes/
 #### UserController - Endpoint
 | HTTP Method | Endpoint | Description |  HTTP Responses |
 | :---         |     :---:      |          :---: |          :--- |
-| POST   | /api/v1/users     | registrar un nuevo user    | 201 (CREATED), 400 (BAD REQUEST) |
+| POST   | /api/v1/users     | Registra un nuevo user    | 201 (CREATED), 400 (BAD REQUEST) |
 | GET     | /api/v1/users       | Obtiene todos los users      | 200 (OK) |
 | GET     | /api/v1/users/{id}       | Obtiene user por su ID      | 200 (OK), 404 (NOT FOUND) |
 | DELETE     | /api/v1/users/{id}       | Elimina user por su ID      |  204 (NO CONTENT), 404 (NOT FOUND) |
@@ -79,7 +79,7 @@ project-notes/
 #### NoteController - Endpoint
 | HTTP Method | Endpoint | Description |  HTTP Responses |
 | :---         |     :---:      |          :---: |          :--- |
-| POST   | /api/v1/notes     | registrar un nuevo notes    | 201 (CREATED), 400 (BAD REQUEST) |
+| POST   | /api/v1/notes     | Registra un nuevo notes    | 201 (CREATED), 400 (BAD REQUEST) |
 | GET     | /api/v1/notes       | Obtiene todos los notes      | 200 (OK) |
 | GET     | /api/v1/notes/{id}       | Obtiene un notes por su ID      | 200 (OK), 404 (NOT FOUND) |
 | PUT     | /api/v1/notes/{id}       | Actualiza un notes existente por su ID      | 200 (OK), 404 (NOT FOUND) |
@@ -88,7 +88,7 @@ project-notes/
 #### TagController - Endpoint
 | HTTP Method | Endpoint | Description |  HTTP Responses |
 | :---         |     :---:      |          :---: |          :--- |
-| POST   | /api/v1/tags     | registrar un nuevo tags    | 201 (CREATED), 400 (BAD REQUEST) |
+| POST   | /api/v1/tags     | Registra un nuevo tags    | 201 (CREATED), 400 (BAD REQUEST) |
 | GET     | /api/v1/tags       | Obtiene todos los tags      | 200 (OK) |
 | DELETE     | /api/v1/tags/{id}       | Elimina un tags por su ID      |  204 (NO CONTENT), 404 (NOT FOUND) |
 

@@ -92,3 +92,5 @@ project-notes/
 | GET     | /api/v1/tags       | Obtiene todos los tags      | 200 (OK) |
 | DELETE     | /api/v1/tags/{id}       | Elimina un tags por su ID      |  204 (NO CONTENT), 404 (NOT FOUND) |
 
+## Database Design
+![alt text](https://github.com/The-Rigo/project-notes/blob/main/assets/Project-Notes.png)

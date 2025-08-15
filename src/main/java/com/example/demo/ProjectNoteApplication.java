@@ -5,14 +5,18 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Import;
 import org.springframework.core.env.Environment;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Optional;
 
 @SpringBootApplication
+@EnableJpaAuditing
+@EntityScan(basePackages = "com.example.demo.model")
 public class ProjectNoteApplication {
 
 

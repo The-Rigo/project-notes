@@ -47,7 +47,7 @@ public class TagServiceImpl implements TagService {
         }
         return tagRepository.findById(id)
                 .map(existingTag -> {
-                    existingTag.setName(tagDetails.getName());
+                    existingTag.setName("test");
                     return tagRepository.save(existingTag);
                 })
                 .orElseThrow(()-> new RuntimeException("Tag not found with id: "+id));

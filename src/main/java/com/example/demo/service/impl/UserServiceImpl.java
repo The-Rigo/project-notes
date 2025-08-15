@@ -3,6 +3,7 @@ package com.example.demo.service.impl;
 import com.example.demo.model.User;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.service.interfaces.UserService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,10 +15,12 @@ import java.util.Optional;
 @Transactional
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -25,6 +28,7 @@ public class UserServiceImpl implements UserService {
         if (user == null) {
             throw  new IllegalArgumentException("User cannot be null");
         }
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
 
@@ -44,25 +48,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User update(Long id, User userDetails) {
-        if (id == null || userDetails == null) {
-            throw new IllegalArgumentException("ID and user details cannot be null");
-        }
-        return userRepository.findById(id)
-                .map(existingUser -> {
-                    existingUser.setUsername(userDetails.getUsername());
-                    existingUser.setPassword(userDetails.getPassword());
-                    existingUser.setEmail(existingUser.getEmail());
-                    return userRepository.save(existingUser);
-                })
-                .orElseThrow(()-> new RuntimeException("User not found with id: "+id));
-    }
-
-    @Override
     public void delete(Long id) {
         if (id == null) {
             throw new IllegalArgumentException("ID cannot be null");
         }
         userRepository.deleteById(id);
     }
+
 }

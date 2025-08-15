@@ -28,5 +28,5 @@ public class User extends BaseEntity {
     private String password; // BCrypt hash
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Note> notes = new ArrayList<>();
+    private List<Tag> tags = new ArrayList<>();
 }

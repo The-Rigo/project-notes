@@ -41,10 +41,6 @@ public class Note extends BaseEntity {
     @Column(name = "archived",nullable = false)
     private Boolean archived;
 
-    @ManyToOne(fetch = FetchType.LAZY) // Optimización de rendimiento
-    @JoinColumn(name = "user_id")
-    private User user;
-
     @ManyToMany
     @JoinTable(name = "tag_note",
             joinColumns = @JoinColumn(name = "note_id"),

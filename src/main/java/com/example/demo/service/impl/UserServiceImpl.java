@@ -102,10 +102,24 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public User assignTag(Long userId, List<Long> tagIds) {
         User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException(USERNOTFOUND));
-        List<Tag> roles = tagRepository.findAllById(tagIds);
-        user.setTags(roles);
+        List<Tag> tags = tagRepository.findAllById(tagIds);
+        // Asignar usuario a cada tag (lado propietario de la relación)
+        for (Tag tag : tags) {
+            tag.setUser(user);
+        }
+
+        user.setTags(tags);
         return userRepository.save(user);
+    }
+
+    @Override
+    public List<Tag> getTagsByUser(Long userId) {
+        if (userId == null) {
+            throw new IllegalArgumentException("User ID cannot be null");
+        }
+        return tagRepository.findByUserId(userId);
     }
 }

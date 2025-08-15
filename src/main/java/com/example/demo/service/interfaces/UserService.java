@@ -1,5 +1,6 @@
 package com.example.demo.service.interfaces;
 
+import com.example.demo.model.Tag;
 import com.example.demo.model.User;
 
 import java.util.List;
@@ -11,4 +12,5 @@ public interface UserService {
     List<User> findAll();
     void delete(Long id);
     User assignTag(Long userId, List<Long> tagIds);
+    List<Tag> getTagsByUser(Long userId);
 }

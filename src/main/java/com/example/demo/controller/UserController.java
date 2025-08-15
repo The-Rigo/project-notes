@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.model.Tag;
 import com.example.demo.model.User;
 import com.example.demo.service.interfaces.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,5 +67,10 @@ public class UserController {
             @PathVariable Long id,
             @RequestBody List<Long> tagIDs){
         return ResponseEntity.ok(userService.assignTag(id,tagIDs));
+    }
+
+    @GetMapping("/{id}/tags")
+    public ResponseEntity<List<Tag>> getRolesByUser(@PathVariable Long id) {
+        return ResponseEntity.ok(userService.getTagsByUser(id));
     }
 }

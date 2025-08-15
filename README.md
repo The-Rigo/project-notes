@@ -19,7 +19,7 @@
   > mvn install clean
 
   ### Step 3
-  ### Run Spring Boot
+  #### Run Spring Boot
   > mvn spring-boot:run
 
 ## 🧱 Project structure in Backend

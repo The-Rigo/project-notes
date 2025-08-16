@@ -21,17 +21,31 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * REST Controller for managing tag operations.
+ * Provides endpoints for basic tag CRUD operations.
+ * Base URL: /api/v1/tags
+ */
 @RestController
 @RequestMapping("/api/v1/tags")
 public class TagController {
 
     private final TagService tagService;
 
+    /**
+     * Constructor for dependency injection of TagService
+     * @param tagService Service layer for tag operations
+     */
     @Autowired
     public TagController(TagService tagService) {
         this.tagService = tagService;
     }
 
+    /**
+     * Creates a new tag
+     * @param tag Tag object to be created (from request body)
+     * @return ResponseEntity with created tag (201) or error (400) if name is missing
+     */
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<?> createTag(@RequestBody Tag tag){
@@ -43,16 +57,39 @@ public class TagController {
         Tag createdTag = tagService.create(tag);
         return new ResponseEntity<>(createdTag, HttpStatus.CREATED);
     }
+
+    /**
+     * Retrieves all tags
+     * @return ResponseEntity with list of all tags (200)
+     */
     @GetMapping
     public ResponseEntity<List<Tag>> getAllTag() {
         List<Tag> tags = tagService.findAll();
         return  new ResponseEntity<>(tags, HttpStatus.OK);
     }
 
+    /**
+     * Deletes a tag by ID
+     * @param id Tag ID to delete
+     * @return Empty response with status 204 (No Content)
+     */
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public ResponseEntity<Void> deleteTag(@PathVariable Long id) {
         tagService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    /**
+     * Assigns tags to a user
+     * @param id User ID to receive tags
+     * @param noteIDs List of tag IDs to assign
+     * @return ResponseEntity with updated user (200)
+     */
+    @PostMapping("/{id}/notes")
+    public ResponseEntity<Tag> assignTags(
+            @PathVariable Long id,
+            @RequestBody List<Long> noteIDs){
+        return ResponseEntity.ok(tagService.assignNotes(id,noteIDs));
     }
 }

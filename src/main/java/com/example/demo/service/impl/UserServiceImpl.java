@@ -5,6 +5,7 @@ import com.example.demo.model.User;
 import com.example.demo.repository.TagRepository;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.service.interfaces.UserService;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,6 @@ import java.util.Optional;
 @Service
 @Transactional
 public class UserServiceImpl implements UserService {
-    private static final String USER_NOT_FOUND_MSG = "User not found with id: ";
     private static final String NULL_ARGUMENT_MSG = " cannot be null";
     private static final String USERNOTFOUND = "User not found";
 
@@ -53,8 +53,9 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional(readOnly = true)
     public Optional<User> findById(Long id) {
-        validateNotNull(id, "ID");
-        return userRepository.findById(id);
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("User not found with id: " + id));
+        return Optional.of(user);
     }
 
     /**
@@ -101,25 +102,45 @@ public class UserServiceImpl implements UserService {
         return existingUser;
     }
 
+    /**
+     * Assigns tags to a specific user (owner of the relationship).
+     * Transactional operation to ensure data consistency.
+     *
+     * @param userId ID of the user to receive tags
+     * @param tagIds List of tag IDs to assign to the user
+     * @return The updated user entity with new tags
+     * @throws RuntimeException if user is not found
+     */
     @Override
     @Transactional
     public User assignTag(Long userId, List<Long> tagIds) {
+        // Find user or throw exception if not found
         User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException(USERNOTFOUND));
+        // Get all tags from provided IDs
         List<Tag> tags = tagRepository.findAllById(tagIds);
-        // Asignar usuario a cada tag (lado propietario de la relación)
+        // Set user reference on each tag (owner side of relationship)
         for (Tag tag : tags) {
             tag.setUser(user);
         }
-
+        // Update user's tag collection and save
         user.setTags(tags);
         return userRepository.save(user);
     }
 
+    /**
+     * Retrieves all tags associated with a specific user.
+     *
+     * @param userId ID of the user to query tags for
+     * @return List of tags belonging to the user
+     * @throws IllegalArgumentException if userId is null
+     */
     @Override
     public List<Tag> getTagsByUser(Long userId) {
+        // Validate input
         if (userId == null) {
             throw new IllegalArgumentException("User ID cannot be null");
         }
+        // Query repository for user's tags
         return tagRepository.findByUserId(userId);
     }
 }

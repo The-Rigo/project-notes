@@ -11,4 +11,5 @@ public interface TagService {
     List<Tag> findAll();
     Tag update(Long id, Tag tagDetails);
     void delete(Long id);
+    Tag assignNotes(Long tagId, List<Long> noteIds);
 }

@@ -1,6 +1,7 @@
 package com.example.demo.model;
 
 import com.example.demo.model.base.BaseEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -61,5 +62,6 @@ public class Note extends BaseEntity {
     @JoinTable(name = "tag_note",
             joinColumns = @JoinColumn(name = "note_id"),
             inverseJoinColumns = @JoinColumn(name = "tag_id"))
+    @JsonIgnore
     private Set<Tag> tags = new HashSet<>();
 }

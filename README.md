@@ -89,6 +89,7 @@ project-notes/
 | POST   | /api/v1/tags     | Create a new tag    | 201 (CREATED), 400 (BAD REQUEST) |
 | GET     | /api/v1/tags       | Get all the tags      | 200 (OK) |
 | DELETE     | /api/v1/tags/{id}       | Delete a tags by ID      |  204 (NO CONTENT), 404 (NOT FOUND) |
+| POST     | /api/v1/tags/{id}/notes       | Assign notes by tags      |  201 (CREATED), 400 (BAD REQUEST), 404 (NOT FOUND) |
 
 ## 💾Database Design
 ![alt text](https://github.com/The-Rigo/project-notes/blob/main/assets/Project-Notes.png)

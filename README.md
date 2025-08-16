@@ -9,16 +9,12 @@
 - **Spring Data JPA**
 - **springdoc-openapi**
 
-## 🚀 Run project
+## 🚀 Run project  
   ### Step 1
-  #### Run docker compose 
-  > docker-compose up -d
-  
-  ### Step 2
   #### Run maven 
   > mvn install clean
 
-  ### Step 3
+  ### Step 2
   #### Run Spring Boot
   > mvn spring-boot:run
 
